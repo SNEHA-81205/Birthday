@@ -1,0 +1,268 @@
+/* Base & mobile-first styles */
+:root{
+  --bg-1:#6a0dad;      /* purple */
+  --bg-2:#a855f7;      /* light purple */
+  --bg-3:#8b5cf6;      /* violet */
+  --glass: rgba(255,255,255,0.1);
+  --glass-strong: rgba(255,255,255,0.25);
+  --text:#ffffff;
+  --accent:#ff8ee6;    /* warm gold for emphasis */
+  --shadow: 0 10px 30px rgba(0,0,0,0.25);
+  --radius: 20px;
+}
+
+*{ box-sizing:border-box; }
+html,body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+
+  /* 🎉 Background image for entire website */
+  background: url("bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  
+}
+
+
+/* Shimmering, shiny purple gradient background */
+/*.bg-shimmer{
+  position:fixed; inset:0; z-index:-2;
+  background: linear-gradient(120deg, var(--bg-1), var(--bg-2), var(--bg-3), var(--bg-1));
+  background-size: 300% 300%;
+  animation: shimmer 16s ease-in-out infinite;
+  filter: saturate(120%);
+}
+@keyframes shimmer{
+  0%{ background-position: 0% 50%; }
+  50%{ background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+
+/* Tiny sparkle layer */
+/*.sparkles{
+  position:fixed; inset:0; z-index:-1;
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.8), transparent 60%),
+    radial-gradient(1.5px 1.5px at 70% 50%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.8px 1.8px at 40% 80%, rgba(255,255,255,0.7), transparent 60%),
+    radial-gradient(1.2px 1.2px at 85% 20%, rgba(255,255,255,0.9), transparent 60%);
+  filter: blur(0.2px);
+  animation: twinkle 6s linear infinite;
+  pointer-events:none;
+}
+@keyframes twinkle{
+  0%,100%{ opacity:0.7; }
+  50%{ opacity:1; }
+}*/
+
+/* Layout */
+.wrap{
+  min-height:100dvh;
+  display:grid;
+  place-items:center;
+  padding: 20px;
+}
+
+.card{
+  width:100%;
+  max-width: 680px;
+  background: linear-gradient(180deg, var(--glass), rgba(255,255,255,0.05));
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: 20px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: translateY(0);
+  animation: floatIn 700ms ease both;
+}
+.card-center{
+  text-align:center;
+}
+@keyframes floatIn{
+  from{ opacity:0; transform: translateY(10px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.hidden{ display:none; }
+
+.title{
+  margin: 8px 0 4px;
+  font-size: 1.8rem;
+  line-height:1.2;
+}
+.subtitle{
+  margin: 0 0 16px;
+  font-size: 1rem;
+  opacity: 0.95;
+}
+
+/* Buttons */
+.btn-primary, .btn-ghost{
+  border:0;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 999px;
+  cursor:pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+  outline: none;
+}
+.btn-primary{
+  color:#2b0b4d;
+  background: linear-gradient(90deg, #ff8ee6, #ff8ee6);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+  font-weight: 700;
+}
+.btn-primary:active{ transform: translateY(1px) scale(0.99); }
+
+.btn-ghost{
+  margin-top: 14px;
+  color:#fff;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+.btn-ghost:hover{ background: var(--glass-strong); }
+
+/* Note area */
+#note h2{
+  margin: 6px 0 10px;
+  font-size: 1.4rem;
+}
+#heartNote{
+  margin: 0 0 16px;
+  line-height:1.6;
+  font-size: 1rem;
+}
+
+/* Cake block */
+.cake-area{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.cake{
+  width: 180px; height: 180px;
+}
+.cake ellipse{ fill: rgba(0,0,0,0.25); }
+.cake rect{ fill: #ff9ecf; }
+.cake path:nth-of-type(1){ fill: #ffd1e8; }  /* icing drip */
+.cake rect:nth-of-type(2),
+.cake path:nth-of-type(2){ fill: #ffd166; }  /* candle + flame */
+
+.cake-text{
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  text-align:center;
+  font-size: 1.2rem;
+  color: #fff9d6;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* Simple confetti */
+.confetti{
+  position: fixed;
+  top:-10px;
+  width:8px; height:14px;
+  background: white;
+  opacity: 0.95;
+  border-radius: 2px;
+  transform: rotate(0deg);
+  animation: fall linear forwards;
+  pointer-events:none;
+  z-index: 20;
+}
+@keyframes fall{
+  to{
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+/* Responsive font sizes (your preferred breakpoints) */
+/* Small devices (phones) */
+@media (max-width: 600px){
+  .title{ font-size: 1.6rem; }
+  .subtitle, #heartNote{ font-size: 14px; }
+}
+/* Medium devices (tablets) */
+@media (min-width: 601px) and (max-width: 1024px){
+  .title{ font-size: 1.8rem; }
+  .subtitle, #heartNote{ font-size: 16px; }
+}
+/* Large devices (desktops) */
+@media (min-width: 1025px){
+  .title{ font-size: 2rem; }
+  .subtitle, #heartNote{ font-size: 18px; }
+}
+
+
+/* ---- existing CSS already above ---- */
+
+/* 3D Gallery Section */
+.gallery-wrap {
+  perspective: 1200px;
+  width: 100%;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.ring {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  transform-style: preserve-3d;
+  animation: spin 20s linear infinite;
+}
+
+.ring img {
+  position: absolute;
+  width: 140px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  border: 3px solid white;
+}
+
+.center-text {
+  margin-top: 30px;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2rem;
+  text-align: center;
+  color: #fff9d6;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+}
+
+@keyframes spin {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+
+
+.cake-img {
+  width: 120px;   /* adjust as per your design */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
